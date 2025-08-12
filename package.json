@@ -1,0 +1,26 @@
+{
+  "name": "support-cody",
+  "version": "1.0.0",
+  "description": "Welcome to the GitHub repository for [Support Cody](https://qiallyme.github.io/support-cody) — a personal donation and outreach page created by Cody Rice-Velasquez.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:assets": "node scripts/generate-assets.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qiallyme/support-cody.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qiallyme/support-cody/issues"
+  },
+  "homepage": "https://github.com/qiallyme/support-cody#readme",
+  "type": "module",
+  "devDependencies": {
+    "glob": "^11.0.3",
+    "picocolors": "^1.1.1"
+  }
+}
