@@ -149,6 +149,83 @@
       </table>
     </section>
 
+    <!-- FINANCIAL SNAPSHOT -->
+    <section class="bg-white border rounded-xl p-6 shadow-sm" id="finance">
+      <h2 class="text-2xl font-bold mb-2">Financial Snapshot</h2>
+      <p class="text-gray-600 mb-4">Transparent costs so you don’t have to ask. Rates shown are current loan terms.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Loans -->
+        <div class="border rounded-lg p-4">
+          <h3 class="text-xl font-semibold mb-3">Mortgages</h3>
+          <table class="w-full text-sm">
+            <thead class="bg-gray-100 text-gray-700">
+              <tr>
+                <th class="text-left p-2">Loan</th>
+                <th class="text-left p-2">Balance</th>
+                <th class="text-left p-2">Rate (APR)</th>
+                <th class="text-left p-2">Monthly</th>
+              </tr>
+            </thead>
+            <tbody id="loanRows" class="divide-y"></tbody>
+          </table>
+          <p class="text-xs text-gray-500 mt-2">Monthly shown is the current payment, not a new-loan estimate.</p>
+        </div>
+
+        <!-- Carry -->
+        <div class="border rounded-lg p-4">
+          <h3 class="text-xl font-semibold mb-3">Monthly Carry (All-In)</h3>
+          <table class="w-full text-sm">
+            <tbody class="divide-y">
+              <tr><td class="p-2">Mortgage 1</td><td class="p-2 text-right" id="m1Monthly">$0</td></tr>
+              <tr><td class="p-2">Mortgage 2</td><td class="p-2 text-right" id="m2Monthly">$0</td></tr>
+              <tr><td class="p-2">Homeowners Insurance</td><td class="p-2 text-right" id="insMonthly">$0</td></tr>
+              <tr><td class="p-2">Property Taxes (monthly)</td><td class="p-2 text-right" id="taxMonthly">$0</td></tr>
+              <tr><td class="p-2">HOA</td><td class="p-2 text-right" id="hoaMonthly">$0</td></tr>
+              <tr class="font-semibold bg-gray-50"><td class="p-2">Estimated Total Monthly</td><td class="p-2 text-right" id="carryTotal">$0</td></tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-gray-500 mt-2">If taxes/insurance are escrowed, your actual mortgage line may already include them.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <!-- Payoff -->
+        <div class="border rounded-lg p-4">
+          <h3 class="text-xl font-semibold mb-3">Estimated Payoffs</h3>
+          <table class="w-full text-sm">
+            <tbody class="divide-y">
+              <tr><td class="p-2">Mortgage 1 Balance</td><td class="p-2 text-right" id="m1Bal">$0</td></tr>
+              <tr><td class="p-2">Mortgage 2 Balance</td><td class="p-2 text-right" id="m2Bal">$0</td></tr>
+              <tr><td class="p-2">Est. Closing/Payoff Fees</td><td class="p-2 text-right" id="fees">$0</td></tr>
+              <tr class="font-semibold bg-gray-50"><td class="p-2">Total Estimated Payoffs</td><td class="p-2 text-right" id="payoffTotal">$0</td></tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-gray-500 mt-2">Use your title payoff quote for final numbers. Enter a good-through date below.</p>
+        </div>
+
+        <!-- Docs -->
+        <div class="border rounded-lg p-4">
+          <h3 class="text-xl font-semibold mb-3">Financial Documents</h3>
+          <p class="text-gray-600 mb-3">Statements, tax bills, HOA info, and insurance proof.</p>
+          <div class="flex flex-wrap gap-3">
+            <a class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-lg"
+               href="https://drive.google.com/drive/folders/13eU13j9emzRBpnVPWsHQHqurmQjhuq_1?usp=sharing" target="_blank" rel="noopener">📂 Google Drive</a>
+            <a class="inline-flex items-center gap-2 border hover:bg-gray-50 font-semibold py-2.5 px-4 rounded-lg"
+               href="./property-docs/" target="_blank" rel="noopener">📎 Local Docs</a>
+          </div>
+          <p class="text-xs text-gray-500 mt-2" id="goodThroughNote"></p>
+        </div>
+      </div>
+
+      <ul class="text-xs text-gray-500 mt-4 list-disc pl-5">
+        <li id="assumableNote">Assumability: specify if Mortgage 1 at 4.00% is assumable; otherwise note “not assumable.”</li>
+        <li id="prepayNote">Prepayment penalties: specify if any; otherwise “none.”</li>
+        <li id="escrowNote">Escrow: note whether taxes/insurance are escrowed into any mortgage payment.</li>
+        <li id="utilityAvgNote">Utility averages: optional monthly averages for electricity and water help with budgeting.</li>
+      </ul>
+    </section>
+
     <!-- GALLERY -->
     <section class="bg-white border rounded-xl p-6 shadow-sm">
       <h2 class="text-2xl font-bold mb-4">Property Gallery</h2>
@@ -185,7 +262,7 @@
       </div>
 
       <p class="text-sm text-gray-500 mt-4">
-        Place your files in <code>/property-docs/</code> (PDF, JPG, PNG). Update the list in the script at the bottom of this page.
+        Place your files in <code>/property-docs/</code> (PDF, JPG, PNG). Lists are generated by <code>docs.json</code>.
       </p>
     </section>
 
@@ -220,13 +297,13 @@
     document.getElementById('y').textContent = new Date().getFullYear();
     const b = document.getElementById('navbtn'), m = document.getElementById('navm');
     b?.addEventListener('click', ()=> m.classList.toggle('hidden'));
-  
+
     async function fetchJSON(url){
       const r = await fetch(url + '?v=' + Date.now()); // cache-bust
       if(!r.ok) throw new Error('Failed to load ' + url);
       return r.json();
     }
-  
+
     // Render gallery
     (async () => {
       try {
@@ -249,7 +326,7 @@
           '<p class="text-sm text-red-600">Could not load gallery.</p>';
       }
     })();
-  
+
     // Render docs
     (async () => {
       try {
@@ -257,9 +334,9 @@
         const list = document.getElementById('docList');
         const frame = document.getElementById('docFrame');
         const dl = document.getElementById('docDownload');
-  
+
         function setDoc(src){ frame.src = src; dl.href = src; }
-  
+
         list.innerHTML = '';
         docs.forEach((d,i) => {
           const li = document.createElement('li');
@@ -274,7 +351,75 @@
           '<li class="text-sm text-red-600">Could not load documents.</li>';
       }
     })();
+
+    // ====== FINANCIAL CONFIG — EDIT THESE VALUES ======
+    const finance = {
+      // balances = current estimated payoff balances
+      mortgage1: { balance: 0, rate: 4.0, monthly: 0, escrowed: false },
+      mortgage2: { balance: 0, rate: 7.5, monthly: 0, escrowed: false },
+      insuranceMonthly: 0,
+      taxesAnnual: 2952,
+      hoaMonthly: 22,
+      estFees: 0,
+      payoffGoodThrough: '',     // e.g., "Good through Aug 12, 2025"
+      assumable: 'no',           // 'yes' or 'no'
+      prepaymentPenalty: 'none', // 'none' or details
+      utilitiesAvg: { electric: 0, water: 0 } // optional monthly averages
+    };
+    // ====== END CONFIG ======
+
+    const fmt = n => n.toLocaleString(undefined, { style:'currency', currency:'USD', maximumFractionDigits:0 });
+    const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+
+    function renderFinance() {
+      // Mortgage rows
+      const rows = [
+        { label:'Mortgage 1', bal: finance.mortgage1.balance, rate: finance.mortgage1.rate, mon: finance.mortgage1.monthly },
+        { label:'Mortgage 2', bal: finance.mortgage2.balance, rate: finance.mortgage2.rate, mon: finance.mortgage2.monthly }
+      ];
+      const tbody = document.getElementById('loanRows');
+      if (tbody) {
+        tbody.innerHTML = rows.map(r => `
+          <tr>
+            <td class="p-2">${r.label}</td>
+            <td class="p-2">${fmt(r.bal || 0)}</td>
+            <td class="p-2">${(r.rate ?? 0).toFixed(2)}%</td>
+            <td class="p-2">${fmt(r.mon || 0)}</td>
+          </tr>
+        `).join('');
+      }
+
+      const taxMonthly = (finance.taxesAnnual || 0) / 12;
+      const carry = (finance.mortgage1.monthly || 0)
+                  + (finance.mortgage2.monthly || 0)
+                  + (finance.insuranceMonthly || 0)
+                  + taxMonthly
+                  + (finance.hoaMonthly || 0);
+
+      setText('m1Monthly', fmt(finance.mortgage1.monthly || 0));
+      setText('m2Monthly', fmt(finance.mortgage2.monthly || 0));
+      setText('insMonthly', fmt(finance.insuranceMonthly || 0));
+      setText('taxMonthly', fmt(taxMonthly));
+      setText('hoaMonthly', fmt(finance.hoaMonthly || 0));
+      setText('carryTotal', fmt(carry));
+
+      const payoff = (finance.mortgage1.balance || 0) + (finance.mortgage2.balance || 0) + (finance.estFees || 0);
+      setText('m1Bal', fmt(finance.mortgage1.balance || 0));
+      setText('m2Bal', fmt(finance.mortgage2.balance || 0));
+      setText('fees', fmt(finance.estFees || 0));
+      setText('payoffTotal', fmt(payoff));
+
+      // Notes
+      if (finance.payoffGoodThrough) document.getElementById('goodThroughNote').textContent = `Payoff figures: ${finance.payoffGoodThrough}.`;
+      document.getElementById('assumableNote').textContent = `Assumability: Mortgage 1 at ${finance.mortgage1.rate.toFixed(2)}% is ${finance.assumable === 'yes' ? 'assumable' : 'not assumable'}.`;
+      document.getElementById('prepayNote').textContent = `Prepayment penalties: ${finance.prepaymentPenalty}.`;
+      document.getElementById('escrowNote').textContent = `Escrow: Taxes ${finance.mortgage1.escrowed || finance.mortgage2.escrowed ? 'and/or insurance are' : 'and insurance are not'} escrowed in a mortgage payment.`;
+      const u = finance.utilitiesAvg || {};
+      document.getElementById('utilityAvgNote').textContent = `Utility averages (optional): Electric ${u.electric ? fmt(u.electric) : '—'}, Water ${u.water ? fmt(u.water) : '—'} per month.`;
+    }
+
+    renderFinance();
   </script>
-  
+
 </body>
 </html>
