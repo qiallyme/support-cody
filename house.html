@@ -220,65 +220,61 @@
     document.getElementById('y').textContent = new Date().getFullYear();
     const b = document.getElementById('navbtn'), m = document.getElementById('navm');
     b?.addEventListener('click', ()=> m.classList.toggle('hidden'));
-
-    // === EDIT THESE LISTS ===
-    // Images you place in /property-images/
-    const GALLERY_IMAGES = [
-      {src:'property-images/front.jpg', alt:'Front exterior'},
-      {src:'property-images/entry.jpg', alt:'Entry'},
-      {src:'property-images/living-room.jpg', alt:'Living room'},
-      {src:'property-images/kitchen.jpg', alt:'Kitchen'},
-      {src:'property-images/dining.jpg', alt:'Dining'},
-      {src:'property-images/primary-bedroom.jpg', alt:'Primary bedroom'},
-      {src:'property-images/bathroom.jpg', alt:'Bathroom'},
-      {src:'property-images/basement.jpg', alt:'Finished basement'},
-      {src:'property-images/backyard.jpg', alt:'Backyard'}
-    ];
-
-    // Documents you place in /property-docs/ (PDFs or images)
-    const DOCS = [
-      {name:'Seller Disclosure', src:'property-docs/seller-disclosure.pdf'},
-      {name:'Lead Paint Disclosure', src:'property-docs/lead-paint.pdf'},
-      {name:'Recent Utility Bills', src:'property-docs/utility-bills.pdf'},
-      {name:'Roof Receipt', src:'property-docs/roof-receipt.pdf'}
-    ];
-
-    // === GALLERY RENDER ===
-    const gallery = document.getElementById('gallery');
-    GALLERY_IMAGES.forEach(img => {
-      const el = document.createElement('a');
-      el.href = img.src;
-      el.target = '_blank';
-      el.rel = 'noopener';
-      el.className = 'block group';
-      el.innerHTML = `
-        <img src="${img.src}" alt="${img.alt}" loading="lazy"
-             class="w-full aspect-[4/3] object-cover rounded-lg shadow-sm group-hover:opacity-95">
-        <div class="mt-1 text-xs text-gray-500">${img.alt}</div>
-      `;
-      gallery.appendChild(el);
-    });
-
-    // === DOCS VIEWER RENDER ===
-    const docList = document.getElementById('docList');
-    const docFrame = document.getElementById('docFrame');
-    const docDownload = document.getElementById('docDownload');
-
-    function setDoc(src) {
-      // For PDFs and images, direct load. For other docs, browser may download.
-      docFrame.src = src;
-      docDownload.href = src;
+  
+    async function fetchJSON(url){
+      const r = await fetch(url + '?v=' + Date.now()); // cache-bust
+      if(!r.ok) throw new Error('Failed to load ' + url);
+      return r.json();
     }
-
-    DOCS.forEach((d, i) => {
-      const li = document.createElement('li');
-      li.innerHTML = `
-        <button class="w-full text-left px-3 py-2 rounded border hover:bg-gray-50">${d.name}</button>
-      `;
-      li.querySelector('button').addEventListener('click', () => setDoc(d.src));
-      docList.appendChild(li);
-      if (i === 0) setDoc(d.src);
-    });
+  
+    // Render gallery
+    (async () => {
+      try {
+        const items = await fetchJSON('./gallery.json');
+        const gallery = document.getElementById('gallery');
+        gallery.innerHTML = '';
+        items.forEach(img => {
+          const el = document.createElement('a');
+          el.href = img.src; el.target = '_blank'; el.rel = 'noopener';
+          el.className = 'block group';
+          el.innerHTML = `
+            <img src="${img.src}" alt="${img.alt||''}" loading="lazy"
+                 class="w-full aspect-[4/3] object-cover rounded-lg shadow-sm group-hover:opacity-95">
+            <div class="mt-1 text-xs text-gray-500">${img.alt||''}</div>`;
+          gallery.appendChild(el);
+        });
+      } catch(e) {
+        console.error(e);
+        document.getElementById('gallery').innerHTML =
+          '<p class="text-sm text-red-600">Could not load gallery.</p>';
+      }
+    })();
+  
+    // Render docs
+    (async () => {
+      try {
+        const docs = await fetchJSON('./docs.json');
+        const list = document.getElementById('docList');
+        const frame = document.getElementById('docFrame');
+        const dl = document.getElementById('docDownload');
+  
+        function setDoc(src){ frame.src = src; dl.href = src; }
+  
+        list.innerHTML = '';
+        docs.forEach((d,i) => {
+          const li = document.createElement('li');
+          li.innerHTML = `<button class="w-full text-left px-3 py-2 rounded border hover:bg-gray-50">${d.name}</button>`;
+          li.querySelector('button').addEventListener('click', () => setDoc(d.src));
+          list.appendChild(li);
+          if(i===0) setDoc(d.src);
+        });
+      } catch(e) {
+        console.error(e);
+        document.getElementById('docList').innerHTML =
+          '<li class="text-sm text-red-600">Could not load documents.</li>';
+      }
+    })();
   </script>
+  
 </body>
 </html>
