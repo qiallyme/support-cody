@@ -21,7 +21,7 @@
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
     <div class="max-w-5xl mx-auto px-4">
       <div class="flex items-center justify-between h-14">
-        <a href="./" class="font-extrabold tracking-tight">Support Cody</a>
+        <a href="./" class="font-extrabold tracking-tight text-lg">Support Cody</a>
         <button id="navbtn" class="sm:hidden inline-flex items-center p-2 text-slate-700" aria-label="Menu">
           <svg width="24" height="24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
         </button>
@@ -31,10 +31,10 @@
           <a class="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700" href="./house.html">House for Sale</a>
         </nav>
       </div>
-      <nav id="navm" class="sm:hidden hidden pb-3">
-        <a class="block py-2 hover:underline" href="./index.html">Home</a>
-        <a class="block py-2 hover:underline" href="./myresume.html">Resume</a>
-        <a class="block py-2 text-white bg-blue-600 rounded-md px-3 font-semibold hover:bg-blue-700" href="./house.html">House for Sale</a>
+      <nav id="navm" class="sm:hidden hidden pb-4 space-y-2">
+        <a class="block py-3 px-3 hover:bg-gray-50 rounded-md transition-colors" href="./index.html">Home</a>
+        <a class="block py-3 px-3 hover:bg-gray-50 rounded-md transition-colors" href="./myresume.html">Resume</a>
+        <a class="block py-3 px-3 text-white bg-blue-600 rounded-md font-semibold hover:bg-blue-700" href="./house.html">House for Sale</a>
       </nav>
     </div>
   </header>
@@ -42,71 +42,71 @@
   <!-- HERO -->
   <section class="relative bg-cover bg-center" style="background-image:url('https://source.unsplash.com/1600x500/?sunrise,hope');">
     <div class="absolute inset-0 bg-black/45"></div>
-    <div class="relative z-10 max-w-5xl mx-auto px-4 py-16 text-center text-white">
-      <h1 class="text-4xl sm:text-5xl font-extrabold">Thank you for showing up.</h1>
-      <p class="mt-3 text-lg text-gray-200">Donate, hire, or share. It all helps more than you think.</p>
-      <div class="mt-6 flex flex-wrap gap-3 justify-center">
-        <a class="px-4 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 font-semibold" href="./house.html">🏡 View House 3D Tour</a>
-        <a class="px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 font-semibold" href="#donate">Donate</a>
+    <div class="relative z-10 max-w-5xl mx-auto px-4 py-12 sm:py-16 text-center text-white">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">Thank you for showing up.</h1>
+      <p class="mt-3 text-base sm:text-lg text-gray-200 px-2">Donate, hire, or share. It all helps more than you think.</p>
+      <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center items-center">
+        <a class="w-full sm:w-auto px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 font-semibold text-sm sm:text-base" href="./house.html">🏡 View House 3D Tour</a>
+        <a class="w-full sm:w-auto px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 font-semibold text-sm sm:text-base" href="#donate">Donate</a>
       </div>
     </div>
   </section>
 
-  <main class="max-w-5xl mx-auto px-4 py-10">
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
     <!-- DONATE -->
-    <section id="donate" class="mb-12">
-      <h2 class="text-3xl font-bold mb-2">Donate & Support</h2>
-      <p class="text-slate-600 mb-6">Every contribution matters. Thank you for helping me keep the lights on while I rebuild.</p>
-      <div class="flex flex-col sm:flex-row flex-wrap gap-3">
-        <a href="https://www.gofundme.com/f/breaking-silence-i-need-your-help-to-survive/donate?attribution_id=sl%3Af675e7e8-b610-4927-9308-f63235aa29c7&utm_campaign=unknown&utm_medium=undefined&utm_source=undefined" target="_blank" class="px-4 py-2.5 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 text-center">GoFundMe</a>
-        <a href="https://cash.app/$srv1ne" target="_blank" class="px-4 py-2.5 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700 text-center">Cash App</a>
-        <a href="mailto:crice4485@gmail.com" class="px-4 py-2.5 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 text-center">Zelle</a>
-        <a href="https://www.paypal.com/qrcodes/p2pqrc/EVS7WXML8S3ZL" target="_blank" class="px-4 py-2.5 rounded-lg bg-indigo-600 text-white font-semibold hover:bg-indigo-700 text-center">PayPal</a>
-        <a href="https://square.link/u/qTkK6YbH?src=embed" target="_blank" class="px-4 py-2.5 rounded-lg border font-semibold hover:bg-gray-50 text-center">Donate via Square</a>
-        <a href="https://www.ebay.com/usr/codyr.me" target="_blank" class="px-4 py-2.5 rounded-lg bg-yellow-600 text-white font-semibold hover:bg-yellow-700 text-center">Shop eBay</a>
+    <section id="donate" class="mb-8 sm:mb-12">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-2">Donate & Support</h2>
+      <p class="text-slate-600 mb-6 text-sm sm:text-base">Every contribution matters. Thank you for helping me keep the lights on while I rebuild.</p>
+      <div class="flex flex-col gap-3">
+        <a href="https://www.gofundme.com/f/breaking-silence-i-need-your-help-to-survive/donate?attribution_id=sl%3Af675e7e8-b610-4927-9308-f63235aa29c7&utm_campaign=unknown&utm_medium=undefined&utm_source=undefined" target="_blank" class="px-4 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 text-center text-sm sm:text-base">GoFundMe</a>
+        <a href="https://cash.app/$srv1ne" target="_blank" class="px-4 py-3 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700 text-center text-sm sm:text-base">Cash App</a>
+        <a href="mailto:crice4485@gmail.com" class="px-4 py-3 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 text-center text-sm sm:text-base">Zelle</a>
+        <a href="https://www.paypal.com/qrcodes/p2pqrc/EVS7WXML8S3ZL" target="_blank" class="px-4 py-3 rounded-lg bg-indigo-600 text-white font-semibold hover:bg-indigo-700 text-center text-sm sm:text-base">PayPal</a>
+        <a href="https://square.link/u/qTkK6YbH?src=embed" target="_blank" class="px-4 py-3 rounded-lg border font-semibold hover:bg-gray-50 text-center text-sm sm:text-base">Donate via Square</a>
+        <a href="https://www.ebay.com/usr/codyr.me" target="_blank" class="px-4 py-3 rounded-lg bg-yellow-600 text-white font-semibold hover:bg-yellow-700 text-center text-sm sm:text-base">Shop eBay</a>
       </div>
 
       <!-- QR grid -->
-      <div class="mt-8 space-y-6">
+      <div class="mt-8 space-y-8">
         <figure class="text-center">
-          <img class="w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded object-contain" src="zelle-qr.png" alt="Zelle QR">
-          <figcaption class="mt-4 text-sm font-medium">Zelle</figcaption>
+          <img class="w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto rounded object-contain" src="zelle-qr.png" alt="Zelle QR">
+          <figcaption class="mt-3 sm:mt-4 text-sm font-medium">Zelle</figcaption>
         </figure>
         <figure class="text-center">
-          <img class="w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded object-contain" src="cashapp-qr.png" alt="Cash App QR">
-          <figcaption class="mt-4 text-sm font-medium">Cash App</figcaption>
+          <img class="w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto rounded object-contain" src="cashapp-qr.png" alt="Cash App QR">
+          <figcaption class="mt-3 sm:mt-4 text-sm font-medium">Cash App</figcaption>
         </figure>
         <figure class="text-center">
-          <img class="w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded object-contain" src="venmo-qr.png" alt="Venmo QR">
-          <figcaption class="mt-4 text-sm font-medium">Venmo</figcaption>
+          <img class="w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto rounded object-contain" src="venmo-qr.png" alt="Venmo QR">
+          <figcaption class="mt-3 sm:mt-4 text-sm font-medium">Venmo</figcaption>
         </figure>
         <figure class="text-center">
-          <img class="w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded object-contain" src="paypal-qr.png" alt="PayPal QR">
-          <figcaption class="mt-4 text-sm font-medium">PayPal</figcaption>
+          <img class="w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto rounded object-contain" src="paypal-qr.png" alt="PayPal QR">
+          <figcaption class="mt-3 sm:mt-4 text-sm font-medium">PayPal</figcaption>
         </figure>
         <figure class="text-center">
-          <img class="w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded object-contain" src="square-qr.png" alt="Square QR">
-          <figcaption class="mt-4 text-sm font-medium">Square</figcaption>
+          <img class="w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto rounded object-contain" src="square-qr.png" alt="Square QR">
+          <figcaption class="mt-3 sm:mt-4 text-sm font-medium">Square</figcaption>
         </figure>
       </div>
     </section>
 
     <!-- RESUME -->
-    <section class="mb-12">
-      <h2 class="text-3xl font-bold mb-2">Resume</h2>
-      <p class="text-slate-600 mb-4">Quick view, no downloads required.</p>
+    <section class="mb-8 sm:mb-12">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-2">Resume</h2>
+      <p class="text-slate-600 mb-4 text-sm sm:text-base">Quick view, no downloads required.</p>
       <div class="rounded-lg border shadow overflow-hidden">
-        <iframe class="w-full" style="height:70vh;min-height:480px" src="myresume.html" title="Cody's Resume"></iframe>
+        <iframe class="w-full" style="height:60vh;min-height:400px" src="myresume.html" title="Cody's Resume"></iframe>
       </div>
     </section>
 
     <!-- HIRE -->
     <section class="mb-6">
-      <h2 class="text-3xl font-bold mb-2">Looking to Hire?</h2>
-      <p class="text-slate-600 mb-4">Pitch me something real. I deliver.</p>
+      <h2 class="text-2xl sm:text-3xl font-bold mb-2">Looking to Hire?</h2>
+      <p class="text-slate-600 mb-4 text-sm sm:text-base">Pitch me something real. I deliver.</p>
       <div class="rounded-lg border shadow overflow-hidden">
         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdcfK5mDDny1IIqNmxz329l_HvpzU3y3z_GxC6Zf-ai5IYc8w/viewform?embedded=true"
-                class="w-full" style="height:70vh;min-height:500px" frameborder="0" title="Contact Form">Loading…</iframe>
+                class="w-full" style="height:60vh;min-height:400px" frameborder="0" title="Contact Form">Loading…</iframe>
       </div>
     </section>
   </main>
